@@ -7,6 +7,7 @@ Um morador de São Paulo amante da tecnologia e sempre em busca de mais conhecim
 ## 🚀 Trajetória atual
 
 * Desde 2018 na ***FRETO soluções e tecnologia*** ! 🚚
+  
 Analista de Sistemas com experiência na análise e implementação de soluções para atender às necessidades de empresas de diversos setores. Colaborando com equipes multidisciplinares para projetar e desenvolver sistemas eficientes e orientados a resultados. 
 
 ## Graduações
