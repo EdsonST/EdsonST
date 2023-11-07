@@ -13,9 +13,9 @@ Analista de Sistemas com experiência na análise e implementação de soluçõe
 
 [![G3](https://img.shields.io/badge/Bacharelado_em_Ciências_da_Computação-EM_ANDAMENTO-blue.svg)]()
 
-[![G1](https://img.shields.io/badge/Pós_Graduação_Lato_Senso_em_Ciências_de_Dados-CONCLUÍDO-green.svg)]()
+[![G1](https://img.shields.io/badge/Pós_Graduação_Lato_Senso_em_Ciências_de_Dados-CONCLUÍDO-green.svg)](https://1drv.ms/b/s!Arrf45KccKFErmM_Sp4o0WlgXWpn?e=cDGd89)
 
-[![G2](https://img.shields.io/badge/Superior_em_Tecnologia_em_Gestão_e_SupplyChain-CONCLUÍDO-green.svg)]()
+[![G2](https://img.shields.io/badge/Superior_em_Tecnologia_em_Gestão_e_SupplyChain-CONCLUÍDO-green.svg)](https://1drv.ms/b/s!Arrf45KccKFEjk9kiVN1N8pitT3x?e=hQwWgT)
 
 ## Aprendizado
 
@@ -28,7 +28,7 @@ O que estou aprendendo agora?
 
 ## Licença
 
-[![G2](https://img.shields.io/badge/Licence-YellowBelt-yellow.svg)]()
+[![G2](https://img.shields.io/badge/Licence-YellowBelt-yellow.svg)](https://ead.fm2s.com.br/certificado/201095)
 ## E-mail
 
 Para contato ou dúvidas, mande um e-mail para edson.st@outlook.com 
