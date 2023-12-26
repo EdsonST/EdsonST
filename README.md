@@ -23,6 +23,7 @@ O que estou aprendendo agora?
 
 | Curso | Instituição | Status
 | --- | --- | --- |
+| Full Stack Master | Dankie Code | Em Andamento
 | JavaScript | FreeCodeCamp | Em Andamento
 | Google Analytics GA4  | Udemy | Em Andamento
 
