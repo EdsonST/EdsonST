@@ -2,13 +2,11 @@
   <h1> Bem Vindo ao meu GIT 👋 </h1>
 </header>
 <div>
-  <h2>Sou o Edson Santos</h2>
-  <p>Analista de Sistemas e estudante de Ciências da Computação pela Universidade Anhembi Morumbi e Desenvolvimento Web FullStack pela DankieCode</p>
+  <h2>Sou o <strong>Edson Santos</strong></h2>
+  <p>Analista de Sistemas e estudante de Ciências da Computação pela Universidade Anhembi Morumbi aprendendo Desenvolvimento Web FullStack</p>
 </div>
 
 ![Edson GitHub stats](https://github-readme-stats.vercel.app/api?username=EdsonST&show_icons=true&theme=transparent)
-[![Top Linguagens](https://github-readme-stats.vercel.app/api/top-langs/?username=EdsonST&layout=compact&langs_count=16&theme=transparent)](https://github.com/EdsonST/github-readme-stats)
-
 
 <div style="display: inline_block"><br>
   <img align="center" alt="Rafa-Js" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
@@ -18,7 +16,9 @@
   <img align="center" alt="Rafa-CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
   <img align="center" alt="Rafa-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
   <img align="center" alt="Rafa-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg">
-</div>
+</div><br>
+
+[![Top Linguagens](https://github-readme-stats.vercel.app/api/top-langs/?username=EdsonST&layout=compact&langs_count=16&theme=transparent)](https://github.com/EdsonST/github-readme-stats)
 
 <div style="display: inline_block"><br>
   <h2>Graduações</h2>
@@ -32,7 +32,9 @@
 <div style="display: inline_block"><br>
   <h2>Licenças</h2>
   
-  [![G2](https://img.shields.io/badge/Licence-YellowBelt-yellow.svg)](https://ead.fm2s.com.br/certificado/201095)
+  [![G5](https://img.shields.io/badge/Licence-YellowBelt-yellow.svg)](https://ead.fm2s.com.br/certificado/201095)<br>
+  [![G6](https://img.shields.io/badge/Licence-Green_Software_Development-green.svg)](https://hermes.dio.me/certificates/XZQANZAX.pdf)<br>
+  [![G4](https://img.shields.io/badge/Licence-Foundational_CSharp-blue.svg)](https://www.freecodecamp.org/certification/EdsonST/foundational-c-sharp-with-microsoft) 
 </div>
 
 <div style="display: inline_block"><br>
