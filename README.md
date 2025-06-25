@@ -23,7 +23,7 @@
 <div style="display: inline_block"><br>
   <h2>Graduações</h2>
   
-  [![G3](https://img.shields.io/badge/Bacharelado_em_Ciências_da_Computação-CONCLUÍDO-green.svg)]()
+  [![G3](https://img.shields.io/badge/Bacharelado_em_Ciências_da_Computação-CONCLUÍDO-green.svg)]()<br>
   [![G1](https://img.shields.io/badge/Pós_Graduação_Lato_Senso_em_Ciências_de_Dados-CONCLUÍDO-green.svg)](https://1drv.ms/b/s!Arrf45KccKFErmM_Sp4o0WlgXWpn?e=cDGd89)<br>
   [![G2](https://img.shields.io/badge/Superior_em_Tecnologia_em_Gestão_e_SupplyChain-CONCLUÍDO-green.svg)](https://1drv.ms/b/s!Arrf45KccKFEjk9kiVN1N8pitT3x?e=hQwWgT)
 </div>
