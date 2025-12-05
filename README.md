@@ -6,6 +6,7 @@
   <p>Analista de Sistemas bacharel em Ciências da Computação pela Universidade Anhembi Morumbi aprendendo Desenvolvimento Web FullStack</p>
 </div>
 
+![GitHub Stats](https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=EdsonST&show_icons=true&theme=transparent)
 ![Edson GitHub stats](https://github-readme-stats.vercel.app/api?username=EdsonST&show_icons=true&theme=transparent)
 
 <div style="display: inline_block"><br>
@@ -18,12 +19,12 @@
   <img align="center" alt="Rafa-Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg">
 </div><br>
 
-[![Top Linguagens](https://github-readme-stats.vercel.app/api/top-langs/?username=EdsonST&layout=compact&langs_count=16&theme=transparent)](https://github.com/EdsonST/github-readme-stats)
+[![Top Linguagens](https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/top-langs/?username=EdsonST&layout=compact&langs_count=16&theme=transparent)](https://github.com/EdsonST/github-readme-stats)
 
 <div style="display: inline_block"><br>
   <h2>Graduações</h2>
   
-  [![G3](https://img.shields.io/badge/Bacharelado_em_Ciências_da_Computação-CONCLUÍDO-green.svg)]()<br>
+  [![G3](https://img.shields.io/badge/Bacharelado_em_Ciências_da_Computação-CONCLUÍDO-green.svg)](https://1drv.ms/b/c/44a1709c92e3dfba/IQDdL_EbvHNYR5LIOe1AxtWoAdxbvpi1BqDFy9iF43OWx2I?e=KTamER)<br>
   [![G1](https://img.shields.io/badge/Pós_Graduação_Lato_Senso_em_Ciências_de_Dados-CONCLUÍDO-green.svg)](https://1drv.ms/b/s!Arrf45KccKFErmM_Sp4o0WlgXWpn?e=cDGd89)<br>
   [![G2](https://img.shields.io/badge/Superior_em_Tecnologia_em_Gestão_e_SupplyChain-CONCLUÍDO-green.svg)](https://1drv.ms/b/s!Arrf45KccKFEjk9kiVN1N8pitT3x?e=hQwWgT)
 </div>
