@@ -2,7 +2,7 @@
 <h1 align="center">👋 Bem-vindo ao meu GitHub!</h1>
 
 <p align="center">
-  <strong>Edson Santos</strong> — Analista de Sistemas e Desenvolvedor em formação<br>
+  <strong>Edson Santos</strong> — Analista de Sistemas • Desenvolvedor em Formação • QA em Desenvolvimento Profissional<br>
   Bacharel em Ciência da Computação • Pós-graduado em Ciência de Dados • Tecnólogo em Logística Empresarial
 </p>
 
@@ -10,23 +10,35 @@
 
 ## 🚀 Sobre mim
 
-Sou Analista de Sistemas com Bacharel em Ciência da Computação pela Universidade Anhembi Morumbi e especialização em Ciência de Dados.  
-Atualmente estou aprofundando minhas habilidades em **Desenvolvimento Web Full Stack**, com foco em:
+Sou Analista de Sistemas com formação em Ciência da Computação e especialização em Ciência de Dados.  
+Atualmente atuo em duas frentes complementares:
 
-- JavaScript / TypeScript
-- React
-- C# / .NET
-- Python
-- Robot Frameworks
-- Arquitetura de Software, Boas Práticas e Qualidade de Código
+### 👨‍💻 **Desenvolvimento**
+Em evolução para Desenvolvedor Full Stack, estudando:
 
-Além do desenvolvimento técnico, tenho desenvolvido **liderança, agilidade e gestão de times**, seguindo um plano de evolução com objetivo de unir **habilidades técnicas + gestão + colaboração** para construção de soluções eficientes e liderar times de alta performance.
+- JavaScript / TypeScript  
+- React  
+- C# / .NET  
+- Python  
+- Arquitetura, Boas Práticas e Clean Code  
+
+Busco unir habilidades técnicas e visão de produto, criando soluções eficientes e escaláveis.
+
+### 🧪 **Quality Assurance (QA)**
+Desenvolvendo habilidades profissionais em QA para atuar com:
+
+- Planejamento e Estratégia de Testes  
+- Casos de Teste e Cenários BDD  
+- Testes Funcionais e Não Funcionais  
+- Documentação estruturada (Plano de Teste, Evidências, Relatórios)  
+- Ferramentas como Postman, Robot Framework, Cypress (em estudos)  
+- Mentalidade de qualidade em times ágeis  
+
+Me capacitando para garantir **qualidade de ponta a ponta**, desde análise, entendimento da regra de negócio, prevenção de bugs até colaboração com o time de desenvolvimento.
 
 ---
 
 ## 📊 Estatísticas do GitHub
-
-> 🔧 Usando **GitHub Profile Summary Cards**, que é estável e raramente quebra.
 
 <div align="center">
 
@@ -53,6 +65,19 @@ Além do desenvolvimento técnico, tenho desenvolvido **liderança, agilidade e 
 <img height="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg">
 
 </div>
+
+---
+
+## 🧪 Ferramentas e Práticas de QA
+
+- Planejamento de Testes  
+- Casos de Teste e Cenários BDD (Given-When-Then)  
+- Teste Funcional, Regressão e Exploratório  
+- Postman (APIs)  
+- Gestão de Erros, Logs e Evidências  
+- Fluxos, tabelas de decisão e documentação de qualidade  
+- Mentalidade de prevenção de bugs (Shift Left)  
+- Scrum e metodologias ágeis aplicadas a QA  
 
 ---
 
@@ -89,5 +114,3 @@ Além do desenvolvimento técnico, tenho desenvolvido **liderança, agilidade e 
 ---
 
 <p align="center">Obrigado por visitar! 😄</p>
-
-
