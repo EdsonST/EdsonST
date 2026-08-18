@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Estudo — C# → .NET → AWS → Automação → IA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #2a2a4a;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: #00d4aa;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #8888aa;
+            font-size: 0.95rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: #1a1a3e;
+            border: 1px solid #2a2a5a;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .stat-card .number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00d4aa;
+        }
+
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: #8888aa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar-container {
+            background: #1a1a3e;
+            border-radius: 20px;
+            height: 12px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+            border: 1px solid #2a2a5a;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4aa, #00a8ff);
+            border-radius: 20px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-label {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #8888aa;
+            margin-bottom: 2rem;
+        }
+
+        .phase {
+            background: #1a1a3e;
+            border: 1px solid #2a2a5a;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .phase:hover {
+            border-color: #00d4aa44;
+        }
+
+        .phase-header {
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+
+        .phase-header:hover {
+            background: #22224a;
+        }
+
+        .phase-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .phase-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .phase-0 .phase-icon { background: #2a2a1a; }
+        .phase-1 .phase-icon { background: #1a3a2a; }
+        .phase-2 .phase-icon { background: #1a2a3a; }
+        .phase-3 .phase-icon { background: #1a3a3a; }
+        .phase-4 .phase-icon { background: #2a1a3a; }
+        .phase-5 .phase-icon { background: #2a3a1a; }
+        .phase-6 .phase-icon { background: #3a2a1a; }
+        .phase-7 .phase-icon { background: #3a1a1a; }
+
+        .phase-info h2 {
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+
+        .phase-info span {
+            font-size: 0.8rem;
+            color: #8888aa;
+        }
+
+        .phase-progress {
+            font-size: 0.85rem;
+            color: #00d4aa;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .phase-arrow {
+            color: #8888aa;
+            transition: transform 0.3s;
+            margin-left: 1rem;
+        }
+
+        .phase.open .phase-arrow {
+            transform: rotate(180deg);
+        }
+
+        .phase-content {
+            display: none;
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .phase.open .phase-content {
+            display: block;
+        }
+
+        .week-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .week-group h3 {
+            font-size: 0.9rem;
+            color: #00a8ff;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid #2a2a4a;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .task-item:hover {
+            opacity: 0.8;
+        }
+
+        .task-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #4a4a6a;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .task-item input:checked + .checkmark {
+            background: #00d4aa;
+            border-color: #00d4aa;
+        }
+
+        .task-item input:checked + .checkmark::after {
+            content: '✓';
+            color: #0f0f23;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .task-item input:checked ~ .task-label {
+            text-decoration: line-through;
+            color: #5a5a7a;
+        }
+
+        .task-label {
+            font-size: 0.95rem;
+            color: #ccccdd;
+        }
+
+        .project-card {
+            background: #0f0f23;
+            border: 1px dashed #00d4aa44;
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .project-card h4 {
+            color: #00d4aa;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-card p {
+            color: #aaaacc;
+            font-size: 0.9rem;
+        }
+
+        .rules {
+            background: #1a1a3e;
+            border: 1px solid #2a2a5a;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .rules h2 {
+            color: #ffaa00;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .rules ul {
+            list-style: none;
+        }
+
+        .rules li {
+            padding: 0.5rem 0;
+            color: #ccccdd;
+            font-size: 0.9rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .rules li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #ffaa00;
+        }
+
+        .streak {
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #1a1a3e;
+            border-radius: 12px;
+            border: 1px solid #2a2a5a;
+        }
+
+        .streak h3 {
+            color: #ffaa00;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .streak .days {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffaa00;
+        }
+
+        .streak .days-label {
+            color: #8888aa;
+            font-size: 0.8rem;
+        }
+
+        .streak-btn {
+            margin-top: 0.8rem;
+            padding: 0.6rem 1.5rem;
+            background: #ffaa00;
+            color: #0f0f23;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .streak-btn:hover {
+            background: #ffcc44;
+            transform: scale(1.05);
+        }
+
+        .streak-btn:disabled {
+            background: #4a4a6a;
+            color: #8888aa;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .reset-btn {
+            display: block;
+            margin: 2rem auto 0;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            color: #ff4444;
+            border: 1px solid #ff444444;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .reset-btn:hover {
+            background: #ff444422;
+        }
+
+        .roadmap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .roadmap-step {
+            background: #1a1a3e;
+            border: 1px solid #2a2a5a;
+            border-radius: 8px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
+            color: #8888aa;
+        }
+
+        .roadmap-arrow {
+            color: #4a4a6a;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            header h1 { font-size: 1.5rem; }
+            .stats { flex-direction: column; align-items: center; }
+            .roadmap { gap: 0.3rem; }
+            .roadmap-step { font-size: 0.65rem; padding: 0.3rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Dev Completo — da Base à Liderança Técnica</h1>
+            <p>20 minutos por dia. Um passo de cada vez. Rumo à vaga dos sonhos.</p>
+            <div class="roadmap">
+                <span class="roadmap-step">Infra + Linux</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-step">C# Puro</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-step">.NET Core</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-step">.NET Avançado</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-step">AWS Cloud</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-step">Terraform + CI/CD</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-step">IA Aplicada</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-step">Agentes IA</span>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="number" id="completed-count">0</div>
+                    <div class="label">Concluídos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="total-count">0</div>
+                    <div class="label">Total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="percent-count">0%</div>
+                    <div class="label">Progresso</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="streak">
+            <h3>🔥 Sequência de Estudo</h3>
+            <div class="days" id="streak-days">0</div>
+            <div class="days-label">dias seguidos</div>
+            <button class="streak-btn" id="streak-btn" onclick="markToday()">Estudei hoje ✓</button>
+        </div>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="main-progress"></div>
+        </div>
+        <div class="progress-label" id="progress-label">0% completo</div>
+
+        <!-- FASE 0 -->
+        <div class="phase phase-0" data-phase="0">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-title">
+                    <div class="phase-icon">🟡</div>
+                    <div class="phase-info">
+                        <h2>Fase 0 — Fundamentos de Infraestrutura</h2>
+                        <span>3–4 semanas · Linux, Redes, Active Directory, MongoDB</span>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <span class="phase-progress" data-phase-progress="0">0/0</span>
+                    <span class="phase-arrow">▼</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <div class="week-group">
+                    <h3>Semana 1: Linux Essencial</h3>
+                    <label class="task-item"><input type="checkbox" data-task="0-1"><span class="checkmark"></span><span class="task-label">Navegação: ls, cd, pwd, find, tree</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-2"><span class="checkmark"></span><span class="task-label">Arquivos: cat, less, grep, tail -f, vim básico</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-3"><span class="checkmark"></span><span class="task-label">Permissões: chmod, chown, grupos e usuários</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-4"><span class="checkmark"></span><span class="task-label">Processos: ps, top, htop, kill, systemctl</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-5"><span class="checkmark"></span><span class="task-label">Shell scripting básico (.sh, variáveis, loops, cron)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-6"><span class="checkmark"></span><span class="task-label">SSH — conectar, chaves pública/privada, scp</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-7"><span class="checkmark"></span><span class="task-label">Instalar e rodar .NET no Linux</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 2: Redes de Computadores</h3>
+                    <label class="task-item"><input type="checkbox" data-task="0-8"><span class="checkmark"></span><span class="task-label">Modelo OSI e TCP/IP — camadas e protocolos</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-9"><span class="checkmark"></span><span class="task-label">IP, máscara de sub-rede, gateway, CIDR</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-10"><span class="checkmark"></span><span class="task-label">DNS — como funciona, resolução de nomes</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-11"><span class="checkmark"></span><span class="task-label">HTTP/HTTPS — request, response, status codes, headers</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-12"><span class="checkmark"></span><span class="task-label">Firewall, portas, VPN — conceitos práticos</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-13"><span class="checkmark"></span><span class="task-label">Ferramentas: ping, traceroute, netstat, curl, nslookup</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 3: Active Directory</h3>
+                    <label class="task-item"><input type="checkbox" data-task="0-14"><span class="checkmark"></span><span class="task-label">O que é AD — domínios, forest, árvore, OUs</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-15"><span class="checkmark"></span><span class="task-label">Usuários, grupos e políticas (GPO)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-16"><span class="checkmark"></span><span class="task-label">LDAP — protocolo, queries, atributos</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-17"><span class="checkmark"></span><span class="task-label">Autenticação com AD no .NET (LDAP + DirectoryServices)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-18"><span class="checkmark"></span><span class="task-label">Azure AD / Entra ID — SSO e integração moderna</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 4: MongoDB</h3>
+                    <label class="task-item"><input type="checkbox" data-task="0-19"><span class="checkmark"></span><span class="task-label">NoSQL vs SQL — quando usar cada um</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-20"><span class="checkmark"></span><span class="task-label">Documentos, coleções, BSON</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-21"><span class="checkmark"></span><span class="task-label">CRUD com MongoDB Shell e Compass</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-22"><span class="checkmark"></span><span class="task-label">Filtros, projeções, sort, limit, skip</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-23"><span class="checkmark"></span><span class="task-label">Índices e performance</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-24"><span class="checkmark"></span><span class="task-label">MongoDB Driver para .NET — CRUD na API</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="0-25"><span class="checkmark"></span><span class="task-label">Aggregation Pipeline — $match, $group, $project</span></label>
+                </div>
+                <div class="project-card">
+                    <h4>🛠 Projeto da Fase</h4>
+                    <p>API de catálogo de produtos usando MongoDB + ASP.NET Core rodando no Linux via Docker. Login integrado com LDAP (AD simulado com OpenLDAP).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 1 -->
+        <div class="phase phase-1 open" data-phase="1">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-title">
+                    <div class="phase-icon">🟢</div>
+                    <div class="phase-info">
+                        <h2>Fase 1 — Fundamentos de C#</h2>
+                        <span>3–4 semanas · C# puro, sem framework</span>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <span class="phase-progress" data-phase-progress="1">0/0</span>
+                    <span class="phase-arrow">▼</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <div class="week-group">
+                    <h3>Semana 1–2: Básico</h3>
+                    <label class="task-item"><input type="checkbox" data-task="1-1"><span class="checkmark"></span><span class="task-label">Variáveis, tipos e conversões</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-2"><span class="checkmark"></span><span class="task-label">Condicionais (if, switch, pattern matching)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-3"><span class="checkmark"></span><span class="task-label">Loops (for, foreach, while)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-4"><span class="checkmark"></span><span class="task-label">Métodos (parâmetros, retorno, sobrecarga)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-5"><span class="checkmark"></span><span class="task-label">Arrays e strings</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 3–4: Orientação a Objetos</h3>
+                    <label class="task-item"><input type="checkbox" data-task="1-6"><span class="checkmark"></span><span class="task-label">Classes, objetos e construtores</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-7"><span class="checkmark"></span><span class="task-label">Propriedades e encapsulamento</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-8"><span class="checkmark"></span><span class="task-label">Herança e polimorfismo</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-9"><span class="checkmark"></span><span class="task-label">Interfaces e classes abstratas</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-10"><span class="checkmark"></span><span class="task-label">Generics (List&lt;T&gt;, Dictionary&lt;K,V&gt;)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-11"><span class="checkmark"></span><span class="task-label">LINQ — consultas, filtros, projeções</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-12"><span class="checkmark"></span><span class="task-label">Tratamento de exceções (try/catch/finally)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="1-13"><span class="checkmark"></span><span class="task-label">Async/Await — programação assíncrona</span></label>
+                </div>
+                <div class="project-card">
+                    <h4>🛠 Projeto da Fase</h4>
+                    <p>Sistema de gerenciamento de tarefas no console — CRUD em memória com classes, listas, LINQ e async file I/O.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 2 -->
+        <div class="phase phase-2" data-phase="2">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-title">
+                    <div class="phase-icon">🔵</div>
+                    <div class="phase-info">
+                        <h2>Fase 2 — ASP.NET Core + Banco de Dados</h2>
+                        <span>5–6 semanas · API REST + EF Core + Auth</span>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <span class="phase-progress" data-phase-progress="2">0/0</span>
+                    <span class="phase-arrow">▼</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <div class="week-group">
+                    <h3>Semana 5–6: API REST Básica</h3>
+                    <label class="task-item"><input type="checkbox" data-task="2-1"><span class="checkmark"></span><span class="task-label">Criar projeto com dotnet new webapi</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-2"><span class="checkmark"></span><span class="task-label">Controllers, rotas e verbos HTTP (GET, POST, PUT, DELETE)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-3"><span class="checkmark"></span><span class="task-label">Models, DTOs e AutoMapper</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-4"><span class="checkmark"></span><span class="task-label">Injeção de dependência e Service Layer</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-5"><span class="checkmark"></span><span class="task-label">Middleware e tratamento global de erros</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 7–8: Entity Framework Core</h3>
+                    <label class="task-item"><input type="checkbox" data-task="2-6"><span class="checkmark"></span><span class="task-label">Setup do EF Core + DbContext</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-7"><span class="checkmark"></span><span class="task-label">Migrations — criar, aplicar, reverter</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-8"><span class="checkmark"></span><span class="task-label">Relacionamentos (1:N, N:N)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-9"><span class="checkmark"></span><span class="task-label">Queries com LINQ + EF (Include, Where, Select)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-10"><span class="checkmark"></span><span class="task-label">Validações com FluentValidation ou DataAnnotations</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-11"><span class="checkmark"></span><span class="task-label">Repository Pattern + Unit of Work</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 9–10: Autenticação e Segurança</h3>
+                    <label class="task-item"><input type="checkbox" data-task="2-12"><span class="checkmark"></span><span class="task-label">JWT — geração, validação e refresh tokens</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-13"><span class="checkmark"></span><span class="task-label">ASP.NET Identity — registro, login, roles</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-14"><span class="checkmark"></span><span class="task-label">[Authorize] e políticas de acesso</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-15"><span class="checkmark"></span><span class="task-label">Swagger/OpenAPI para documentação</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="2-16"><span class="checkmark"></span><span class="task-label">CORS, Rate Limiting, Health Checks</span></label>
+                </div>
+                <div class="project-card">
+                    <h4>🛠 Projeto da Fase</h4>
+                    <p>API de controle financeiro pessoal — receitas, despesas, categorias, relatórios, autenticação JWT. Algo que você pode usar de verdade.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 3 -->
+        <div class="phase phase-3" data-phase="3">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-title">
+                    <div class="phase-icon">🔷</div>
+                    <div class="phase-info">
+                        <h2>Fase 3 — .NET Avançado (Nível Entrevista)</h2>
+                        <span>4–5 semanas · Arquitetura, testes, mensageria</span>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <span class="phase-progress" data-phase-progress="3">0/0</span>
+                    <span class="phase-arrow">▼</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <div class="week-group">
+                    <h3>Semana 11–12: Arquitetura e Padrões</h3>
+                    <label class="task-item"><input type="checkbox" data-task="3-1"><span class="checkmark"></span><span class="task-label">Clean Architecture — camadas e responsabilidades</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-2"><span class="checkmark"></span><span class="task-label">SOLID na prática com C#</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-3"><span class="checkmark"></span><span class="task-label">Design Patterns essenciais (Factory, Strategy, Observer)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-4"><span class="checkmark"></span><span class="task-label">CQRS e MediatR</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-5"><span class="checkmark"></span><span class="task-label">Domain-Driven Design — conceitos básicos</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 13–14: Testes e Qualidade</h3>
+                    <label class="task-item"><input type="checkbox" data-task="3-6"><span class="checkmark"></span><span class="task-label">Testes unitários com xUnit</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-7"><span class="checkmark"></span><span class="task-label">Mocking com Moq ou NSubstitute</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-8"><span class="checkmark"></span><span class="task-label">Testes de integração com WebApplicationFactory</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-9"><span class="checkmark"></span><span class="task-label">Logging estruturado com Serilog</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 15: Mensageria e Background Jobs</h3>
+                    <label class="task-item"><input type="checkbox" data-task="3-10"><span class="checkmark"></span><span class="task-label">Background Services e Hosted Services</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-11"><span class="checkmark"></span><span class="task-label">Filas com RabbitMQ ou SQS (conceito + implementação)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-12"><span class="checkmark"></span><span class="task-label">Caching com Redis ou IMemoryCache</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="3-13"><span class="checkmark"></span><span class="task-label">Docker — containerizar sua API .NET</span></label>
+                </div>
+                <div class="project-card">
+                    <h4>🛠 Projeto da Fase</h4>
+                    <p>Refatorar a API financeira: Clean Architecture, testes unitários, logging, cache, Docker. Pronta pra mostrar em entrevista.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 4 -->
+        <div class="phase phase-4" data-phase="4">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-title">
+                    <div class="phase-icon">☁️</div>
+                    <div class="phase-info">
+                        <h2>Fase 4 — AWS Cloud</h2>
+                        <span>4–5 semanas · S3, Lambda, SQS, RDS, deploy</span>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <span class="phase-progress" data-phase-progress="4">0/0</span>
+                    <span class="phase-arrow">▼</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <div class="week-group">
+                    <h3>Semana 16–17: Fundamentos AWS</h3>
+                    <label class="task-item"><input type="checkbox" data-task="4-1"><span class="checkmark"></span><span class="task-label">Criar conta AWS + configurar AWS CLI</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-2"><span class="checkmark"></span><span class="task-label">IAM — usuários, roles, policies</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-3"><span class="checkmark"></span><span class="task-label">S3 — criar buckets, upload, download, presigned URLs</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-4"><span class="checkmark"></span><span class="task-label">S3 — integrar com sua API .NET (AWSSDK.S3)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-5"><span class="checkmark"></span><span class="task-label">RDS — provisionar PostgreSQL na AWS</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-6"><span class="checkmark"></span><span class="task-label">Conectar EF Core ao RDS</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 18–19: Serviços Essenciais</h3>
+                    <label class="task-item"><input type="checkbox" data-task="4-7"><span class="checkmark"></span><span class="task-label">SQS — filas de mensagens, produtor e consumidor</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-8"><span class="checkmark"></span><span class="task-label">SNS — notificações e pub/sub</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-9"><span class="checkmark"></span><span class="task-label">Lambda — criar função C#, triggers (S3, SQS, API Gateway)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-10"><span class="checkmark"></span><span class="task-label">API Gateway — expor Lambda como API REST</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-11"><span class="checkmark"></span><span class="task-label">DynamoDB — NoSQL básico + SDK .NET</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-12"><span class="checkmark"></span><span class="task-label">Secrets Manager / Parameter Store</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 20: Deploy e Infra</h3>
+                    <label class="task-item"><input type="checkbox" data-task="4-13"><span class="checkmark"></span><span class="task-label">ECR — push da imagem Docker</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-14"><span class="checkmark"></span><span class="task-label">ECS Fargate — deploy da API containerizada</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-15"><span class="checkmark"></span><span class="task-label">CloudWatch — logs e métricas</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="4-16"><span class="checkmark"></span><span class="task-label">CI/CD básico com GitHub Actions + AWS</span></label>
+                </div>
+                <div class="project-card">
+                    <h4>🛠 Projeto da Fase</h4>
+                    <p>Deploy da API financeira na AWS: RDS para banco, S3 para uploads de comprovantes, SQS para processar relatórios em background, ECS para rodar a API.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 5 -->
+        <div class="phase phase-5" data-phase="5">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-title">
+                    <div class="phase-icon">⚙️</div>
+                    <div class="phase-info">
+                        <h2>Fase 5 — Terraform + CI/CD (Automação)</h2>
+                        <span>4–5 semanas · IaC, pipelines, GitOps</span>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <span class="phase-progress" data-phase-progress="5">0/0</span>
+                    <span class="phase-arrow">▼</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <div class="week-group">
+                    <h3>Semana 21–22: Terraform Fundamentos</h3>
+                    <label class="task-item"><input type="checkbox" data-task="5-1"><span class="checkmark"></span><span class="task-label">Instalar Terraform + entender IaC (Infrastructure as Code)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-2"><span class="checkmark"></span><span class="task-label">HCL — providers, resources, variables, outputs</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-3"><span class="checkmark"></span><span class="task-label">terraform init, plan, apply, destroy</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-4"><span class="checkmark"></span><span class="task-label">State — o que é, remote state com S3 + DynamoDB</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-5"><span class="checkmark"></span><span class="task-label">Criar S3 bucket + RDS via Terraform</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-6"><span class="checkmark"></span><span class="task-label">Módulos — organizar código reutilizável</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 23–24: Terraform + AWS na Prática</h3>
+                    <label class="task-item"><input type="checkbox" data-task="5-7"><span class="checkmark"></span><span class="task-label">Provisionar VPC, subnets, security groups</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-8"><span class="checkmark"></span><span class="task-label">Criar ECS Fargate + ALB via Terraform</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-9"><span class="checkmark"></span><span class="task-label">Criar Lambda + API Gateway via Terraform</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-10"><span class="checkmark"></span><span class="task-label">Criar SQS + SNS via Terraform</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-11"><span class="checkmark"></span><span class="task-label">Workspaces — ambientes (dev, staging, prod)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-12"><span class="checkmark"></span><span class="task-label">Secrets com AWS Secrets Manager via Terraform</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 25: CI/CD com GitHub Actions</h3>
+                    <label class="task-item"><input type="checkbox" data-task="5-13"><span class="checkmark"></span><span class="task-label">GitHub Actions — workflows, jobs, steps</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-14"><span class="checkmark"></span><span class="task-label">Pipeline: build → test → publish Docker → deploy ECS</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-15"><span class="checkmark"></span><span class="task-label">Pipeline de Terraform: plan em PR, apply em merge</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-16"><span class="checkmark"></span><span class="task-label">Secrets no GitHub + OIDC com AWS (sem access keys)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="5-17"><span class="checkmark"></span><span class="task-label">Branch protection + environments + approvals</span></label>
+                </div>
+                <div class="project-card">
+                    <h4>🛠 Projeto da Fase</h4>
+                    <p>Infraestrutura completa da API financeira provisionada com Terraform: VPC, ECS, RDS, S3, SQS. Pipeline CI/CD que faz build, testa, e deploya automaticamente ao dar push.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 6 -->
+        <div class="phase phase-6" data-phase="6">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-title">
+                    <div class="phase-icon">🟣</div>
+                    <div class="phase-info">
+                        <h2>Fase 6 — IA Aplicada com C#</h2>
+                        <span>3–4 semanas · APIs de IA, embeddings, RAG</span>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <span class="phase-progress" data-phase-progress="6">0/0</span>
+                    <span class="phase-arrow">▼</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <div class="week-group">
+                    <h3>Semana 26–27: Consumindo APIs de IA</h3>
+                    <label class="task-item"><input type="checkbox" data-task="6-1"><span class="checkmark"></span><span class="task-label">Consumir API da OpenAI via HttpClient</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="6-2"><span class="checkmark"></span><span class="task-label">Azure OpenAI Service — setup e chamadas</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="6-3"><span class="checkmark"></span><span class="task-label">Enviar prompts, receber respostas, tratar erros</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="6-4"><span class="checkmark"></span><span class="task-label">Criar endpoint na API que usa IA (ex: resumir texto)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="6-5"><span class="checkmark"></span><span class="task-label">Streaming de respostas (SSE)</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 28–29: RAG e Busca Semântica</h3>
+                    <label class="task-item"><input type="checkbox" data-task="6-6"><span class="checkmark"></span><span class="task-label">Embeddings — o que são e como gerar</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="6-7"><span class="checkmark"></span><span class="task-label">Busca semântica (similarity search / cosine)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="6-8"><span class="checkmark"></span><span class="task-label">RAG — buscar contexto relevante → enviar pro modelo</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="6-9"><span class="checkmark"></span><span class="task-label">Banco vetorial (Qdrant, Pinecone ou pgvector)</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="6-10"><span class="checkmark"></span><span class="task-label">Chunking de documentos e indexação</span></label>
+                </div>
+                <div class="project-card">
+                    <h4>🛠 Projeto da Fase</h4>
+                    <p>Chatbot empresarial — sobe documentos (PDFs, docs), indexa com embeddings no S3 + banco vetorial, responde perguntas com RAG. Infra provisionada via Terraform.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 7 -->
+        <div class="phase phase-7" data-phase="7">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-title">
+                    <div class="phase-icon">🟠</div>
+                    <div class="phase-info">
+                        <h2>Fase 7 — Agentes de IA</h2>
+                        <span>4+ semanas · Semantic Kernel, automação, multi-agentes</span>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <span class="phase-progress" data-phase-progress="7">0/0</span>
+                    <span class="phase-arrow">▼</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <div class="week-group">
+                    <h3>Semana 30–31: Semantic Kernel</h3>
+                    <label class="task-item"><input type="checkbox" data-task="7-1"><span class="checkmark"></span><span class="task-label">Setup do Semantic Kernel no projeto</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="7-2"><span class="checkmark"></span><span class="task-label">Plugins e funções nativas que a IA pode chamar</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="7-3"><span class="checkmark"></span><span class="task-label">Function calling automático</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="7-4"><span class="checkmark"></span><span class="task-label">Memória de conversa e histórico</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="7-5"><span class="checkmark"></span><span class="task-label">Planners — IA decide quais ferramentas usar</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 32+: Agentes e Automação</h3>
+                    <label class="task-item"><input type="checkbox" data-task="7-6"><span class="checkmark"></span><span class="task-label">Agentes que executam tarefas autonomamente</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="7-7"><span class="checkmark"></span><span class="task-label">Orquestração de múltiplos agentes</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="7-8"><span class="checkmark"></span><span class="task-label">Integração com APIs externas, banco, S3</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="7-9"><span class="checkmark"></span><span class="task-label">AWS Bedrock — modelos gerenciados na nuvem</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="7-10"><span class="checkmark"></span><span class="task-label">Deploy de agente como serviço na AWS (Terraform + CI/CD)</span></label>
+                </div>
+                <div class="project-card">
+                    <h4>🛠 Projeto da Fase</h4>
+                    <p>Agente financeiro inteligente — analisa seus gastos (API da fase 2), gera relatórios, sugere cortes, roda na AWS com Bedrock. Infra 100% Terraform. Portfolio completo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 8 — BÔNUS -->
+        <div class="phase phase-7" data-phase="8">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-title">
+                    <div class="phase-icon">⭐</div>
+                    <div class="phase-info">
+                        <h2>Fase 8 — ExtJS + Liderança Técnica (Bônus Vaga)</h2>
+                        <span>3–4 semanas · Front-end corporativo + soft skills de liderança</span>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:center;">
+                    <span class="phase-progress" data-phase-progress="8">0/0</span>
+                    <span class="phase-arrow">▼</span>
+                </div>
+            </div>
+            <div class="phase-content">
+                <div class="week-group">
+                    <h3>Semana 1–2: ExtJS Fundamentos</h3>
+                    <label class="task-item"><input type="checkbox" data-task="8-1"><span class="checkmark"></span><span class="task-label">O que é ExtJS — arquitetura MVC/MVVM, componentes</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-2"><span class="checkmark"></span><span class="task-label">Sencha Cmd — criar projeto, build, watch</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-3"><span class="checkmark"></span><span class="task-label">Componentes básicos: Panel, Grid, Form, Button, Window</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-4"><span class="checkmark"></span><span class="task-label">Stores e Models — carregar dados de API REST</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-5"><span class="checkmark"></span><span class="task-label">Eventos, listeners e callbacks</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-6"><span class="checkmark"></span><span class="task-label">Grid com paginação, filtros e edição inline</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-7"><span class="checkmark"></span><span class="task-label">Formulários com validação e submit para API</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-8"><span class="checkmark"></span><span class="task-label">Layout: Border, HBox, VBox, Card, Accordion</span></label>
+                </div>
+                <div class="week-group">
+                    <h3>Semana 3–4: Liderança Técnica</h3>
+                    <label class="task-item"><input type="checkbox" data-task="8-9"><span class="checkmark"></span><span class="task-label">Papel do tech lead — diferença de dev e líder técnico</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-10"><span class="checkmark"></span><span class="task-label">Code review — como dar e receber feedback técnico</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-11"><span class="checkmark"></span><span class="task-label">Definição de padrões técnicos para o time</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-12"><span class="checkmark"></span><span class="task-label">1:1 técnico — como conversar com desenvolvedores</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-13"><span class="checkmark"></span><span class="task-label">Estimativa de tarefas — planning poker, story points</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-14"><span class="checkmark"></span><span class="task-label">Documentação técnica — ADRs, decisões de arquitetura</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-15"><span class="checkmark"></span><span class="task-label">Gestão de dívida técnica — como priorizar e comunicar</span></label>
+                    <label class="task-item"><input type="checkbox" data-task="8-16"><span class="checkmark"></span><span class="task-label">Onboarding de novos devs — como estruturar</span></label>
+                </div>
+                <div class="project-card">
+                    <h4>🛠 Projeto da Fase</h4>
+                    <p>Front-end em ExtJS consumindo sua API financeira (CRUD completo com Grid, Form e autenticação). Criar um documento de padrões técnicos para um time fictício.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="rules">
+            <h2>⚡ Regras do Jogo</h2>
+            <ul>
+                <li><strong>20 min/dia é sucesso.</strong> Se fizer mais, bônus.</li>
+                <li><strong>Falhou um dia?</strong> Volta no seguinte. Sem drama.</li>
+                <li><strong>Não pule fase.</strong> A tentação vai ser ir direto pra AWS ou IA. Resista.</li>
+                <li><strong>Cada fase tem um projeto.</strong> Você termina construindo, não estudando.</li>
+                <li><strong>Uma fonte por vez.</strong> Não misture cursos. Um ritmo, uma direção.</li>
+                <li><strong>O projeto evolui.</strong> Cada fase adiciona algo no mesmo sistema. No final você tem um portfólio real.</li>
+            </ul>
+        </div>
+
+        <button class="reset-btn" onclick="resetAll()">Resetar todo o progresso</button>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'plano-estudo-csharp-ia-v3';
+        const STREAK_KEY = 'plano-estudo-streak';
+
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            return saved ? JSON.parse(saved) : {};
+        }
+
+        function saveState(state) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function loadStreak() {
+            const saved = localStorage.getItem(STREAK_KEY);
+            return saved ? JSON.parse(saved) : { count: 0, lastDate: null };
+        }
+
+        function saveStreak(streak) {
+            localStorage.setItem(STREAK_KEY, JSON.stringify(streak));
+        }
+
+        function getToday() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        function markToday() {
+            const streak = loadStreak();
+            const today = getToday();
+
+            if (streak.lastDate === today) return;
+
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+            if (streak.lastDate === yesterdayStr) {
+                streak.count += 1;
+            } else if (streak.lastDate !== today) {
+                streak.count = 1;
+            }
+
+            streak.lastDate = today;
+            saveStreak(streak);
+            updateStreakUI();
+        }
+
+        function updateStreakUI() {
+            const streak = loadStreak();
+            const today = getToday();
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+            if (streak.lastDate && streak.lastDate !== today && streak.lastDate !== yesterdayStr) {
+                streak.count = 0;
+                saveStreak(streak);
+            }
+
+            document.getElementById('streak-days').textContent = streak.count;
+
+            const btn = document.getElementById('streak-btn');
+            if (streak.lastDate === today) {
+                btn.disabled = true;
+                btn.textContent = 'Já marcou hoje ✓';
+            } else {
+                btn.disabled = false;
+                btn.textContent = 'Estudei hoje ✓';
+            }
+        }
+
+        function togglePhase(header) {
+            const phase = header.closest('.phase');
+            phase.classList.toggle('open');
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[data-task]');
+            const total = checkboxes.length;
+            const completed = document.querySelectorAll('input[data-task]:checked').length;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            document.getElementById('completed-count').textContent = completed;
+            document.getElementById('total-count').textContent = total;
+            document.getElementById('percent-count').textContent = percent + '%';
+            document.getElementById('main-progress').style.width = percent + '%';
+            document.getElementById('progress-label').textContent = percent + '% completo';
+
+            // Fases 0 a 7 + fase 8 (bônus)
+            ['0','1','2','3','4','5','6','7','8'].forEach(i => {
+                const phaseCompleted = document.querySelectorAll(`.phase[data-phase="${i}"] input[data-task]:checked`).length;
+                const phaseTotal = document.querySelectorAll(`.phase[data-phase="${i}"] input[data-task]`).length;
+                const progressEl = document.querySelector(`[data-phase-progress="${i}"]`);
+                if (progressEl) {
+                    progressEl.textContent = `${phaseCompleted}/${phaseTotal}`;
+                }
+            });
+        }
+
+        function init() {
+            const state = loadState();
+            const checkboxes = document.querySelectorAll('input[data-task]');
+
+            checkboxes.forEach(cb => {
+                const task = cb.getAttribute('data-task');
+                if (state[task]) cb.checked = true;
+
+                cb.addEventListener('change', () => {
+                    const currentState = loadState();
+                    currentState[task] = cb.checked;
+                    saveState(currentState);
+                    updateProgress();
+                });
+            });
+
+            updateProgress();
+            updateStreakUI();
+        }
+
+        function resetAll() {
+            if (confirm('Tem certeza que quer resetar todo o progresso? Isso não pode ser desfeito.')) {
+                localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(STREAK_KEY);
+                document.querySelectorAll('input[data-task]').forEach(cb => cb.checked = false);
+                updateProgress();
+                updateStreakUI();
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
